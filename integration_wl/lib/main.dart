@@ -1,7 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:integration_wl/pages/home.dart';
+import 'package:preferences/preferences.dart';
+import 'package:preferences/preference_service.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await PrefService.init(prefix: 'pref_');
+  PrefService.setDefaultValues({'host': 'localhost'});
+  PrefService.setDefaultValues({'port': '5432'});
+  PrefService.setDefaultValues({'database': 'root'});
+  PrefService.setDefaultValues({'username': 'admin'});
+  PrefService.setDefaultValues({'password': 'admin'});
   runApp(MyApp());
 }
 
