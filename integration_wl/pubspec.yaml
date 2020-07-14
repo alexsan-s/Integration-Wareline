@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   preferences: ^5.1.0
+  postgres: ^2.1.1
   shared_preferences: '>=0.5.8'
 
 
