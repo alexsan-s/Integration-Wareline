@@ -18,13 +18,6 @@ class Setting {
       return "Host/Port inacessível";
     }
   }
-  // banco() async {
-  //   // ignore: await_only_futures
-  //   // var connection = await PostgreSQLConnection(PrefService.getString('host'),
-  //   //     PrefService.getInt('port'), PrefService.getString('database'),
-  //   //     username: PrefService.getString('username'),
-  //   //     password: PrefService.getString('password'));
-  // //   await connection.open();
 
   //   var underline = '';
 
