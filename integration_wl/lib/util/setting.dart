@@ -36,11 +36,6 @@ class Setting {
 
   login() {}
 
-  //   var underline = '';
-
-  //   for (var i = 0; i < 1351; i++) {
-  //     underline = underline + '_';
-  //   }
   //   List<List<dynamic>> teste = await connection.query(
   //       "select nomeope from cadope where podeusar like '${underline}1%' and nomeope like 'TESTE'");
   //   for (final row in teste) {
