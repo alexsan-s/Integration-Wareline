@@ -26,8 +26,8 @@ class _StockState extends State<Stock> {
 
   @override
   Widget build(BuildContext context) {
-    final operator = TextEditingController();
-    final password = TextEditingController();
+    final TextEditingController operator = TextEditingController();
+    final TextEditingController password = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(),

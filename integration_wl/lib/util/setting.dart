@@ -1,8 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:postgres/postgres.dart';
 import 'package:preferences/preferences.dart';
 
 class Setting {
-  Future<String> connection() async {
+  var conn;
+  String underline = '';
+  Future connection() async {
     var connection = await PostgreSQLConnection(
         PrefService.getString('host'),
         int.parse(PrefService.getString('port')),
@@ -11,13 +14,27 @@ class Setting {
         password: PrefService.getString('password'));
 
     try {
-      if (await connection.open() == null) return "Conectado com sucesso.";
+      conn = await connection.open();
+      if (conn == null) {
+        return conn;
+      } else {
+        return conn;
+      }
     } on PostgreSQLException {
       return "Não foi possível conectar ao banco de dados.";
     } catch (SocketException) {
-      return "Host/Port inacessível";
+      return conn;
     }
   }
+
+// The method going to run for decripty.
+  void underlineStr(int qtd) {
+    for (var i = 0; i < qtd; i++) {
+      underline = underline + '_';
+    }
+  }
+
+  login() {}
 
   //   var underline = '';
 

@@ -1,12 +1,24 @@
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
+
 import 'package:flutter/material.dart';
 
 class Build {
+  final TextEditingController operator = TextEditingController();
+  final TextEditingController password = TextEditingController();
+
+  String getOperator() {
+    return operator.text;
+  }
+
   // ignore: unused_element
   Container builOperatorTF(TextEditingController operator) {
     return Container(
       alignment: Alignment.centerLeft,
       height: 60,
       child: TextField(
+        controller: operator,
+        textCapitalization: TextCapitalization.characters,
         decoration: InputDecoration(
             border: InputBorder.none,
             contentPadding: EdgeInsets.only(top: 14.0),
@@ -22,6 +34,7 @@ class Build {
       alignment: Alignment.centerLeft,
       height: 60,
       child: TextField(
+        controller: password,
         obscureText: true,
         decoration: InputDecoration(
             border: InputBorder.none,
@@ -36,8 +49,9 @@ class Build {
       int module) {
     switch (module) {
       case 1:
-        var oper = TextEditingController(text: 'operator');
-        print(oper.toString());
+        print(operator.text);
+        print(password.text);
+        print(md5.convert(utf8.encode(password.text)));
         break;
       default:
     }
