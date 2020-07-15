@@ -23,7 +23,7 @@ class Setting {
     } on PostgreSQLException {
       return "Não foi possível conectar ao banco de dados.";
     } catch (SocketException) {
-      return conn;
+      return "Host/Port inacessível";
     }
   }
 

@@ -30,53 +30,47 @@ class _StockState extends State<Stock> {
     final TextEditingController password = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(),
-      body: AnnotatedRegion<SystemUiOverlayStyle>(
-        value: SystemUiOverlayStyle.light,
-        child: GestureDetector(
-          onTap: () => FocusScope.of(context).unfocus(),
-          child: Stack(
-            children: <Widget>[
-              Container(
-                height: double.infinity,
-                width: double.infinity,
-              ),
-              Container(
-                height: double.infinity,
-                child: SingleChildScrollView(
-                  physics: AlwaysScrollableScrollPhysics(),
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 40.0, vertical: 120.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        'Acessar',
-                        style: TextStyle(
-                            color: Colors.red,
-                            fontSize: 30.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      SizedBox(height: 30.0),
-                      objBuild.builOperatorTF(operator),
-                      SizedBox(height: 30.0),
-                      objBuild.buildPasswordTF(password),
-                      SizedBox(height: 30.0),
-                      objBuild.buildlLoginRB(operator, password, 1),
-                    ],
+        appBar: AppBar(),
+        body: AnnotatedRegion<SystemUiOverlayStyle>(
+          value: SystemUiOverlayStyle.light,
+          child: GestureDetector(
+            onTap: () => FocusScope.of(context).unfocus(),
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  height: double.infinity,
+                  width: double.infinity,
+                ),
+                Container(
+                  height: double.infinity,
+                  child: SingleChildScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 40.0, vertical: 120.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          'Acessar',
+                          style: TextStyle(
+                              color: Colors.red,
+                              fontSize: 30.0,
+                              fontWeight: FontWeight.bold),
+                        ),
+                        SizedBox(height: 30.0),
+                        objBuild.builOperatorTF(operator),
+                        SizedBox(height: 30.0),
+                        objBuild.buildPasswordTF(password),
+                        SizedBox(height: 30.0),
+                        objBuild.buildlLoginRB(operator, password, 1),
+                      ],
+                    ),
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
-      bottomNavigationBar: Text(
-        'Version 1.0',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            fontSize: 15, color: Colors.red, fontWeight: FontWeight.bold),
-      ),
-    );
+        bottomNavigationBar: objBuild.buildVersion());
   }
 }

@@ -7,10 +7,6 @@ class Build {
   final TextEditingController operator = TextEditingController();
   final TextEditingController password = TextEditingController();
 
-  String getOperator() {
-    return operator.text;
-  }
-
   // ignore: unused_element
   Container builOperatorTF(TextEditingController operator) {
     return Container(
@@ -80,6 +76,15 @@ class Build {
               TextStyle(color: Colors.red, letterSpacing: 1.5, fontSize: 20.0),
         ),
       ),
+    );
+  }
+
+  Text buildVersion() {
+    return Text(
+      'Version 1.0',
+      textAlign: TextAlign.center,
+      style: TextStyle(
+          fontSize: 15, color: Colors.red, fontWeight: FontWeight.bold),
     );
   }
 }
