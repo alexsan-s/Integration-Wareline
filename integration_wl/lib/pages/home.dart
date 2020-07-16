@@ -36,6 +36,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 context,
                 MaterialPageRoute(builder: (context) => Configuration()),
               );
+              // ignore: unused_element
               setState() {}
             },
           )

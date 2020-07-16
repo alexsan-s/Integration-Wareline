@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
-
 import 'package:flutter/material.dart';
+import 'package:integration_wl/util/setting.dart';
 
 class Build {
   final TextEditingController operator = TextEditingController();
@@ -44,10 +44,12 @@ class Build {
   open(TextEditingController operator, TextEditingController password,
       int module) {
     switch (module) {
-      case 1:
+      case 12:
+        Setting st = Setting();
         print(operator.text);
         print(password.text);
         print(md5.convert(utf8.encode(password.text)));
+        st.login(module);
         break;
       default:
     }

@@ -10,20 +10,6 @@ class Stock extends StatefulWidget {
 class _StockState extends State<Stock> {
   Build objBuild = Build();
 
-  _builEmailTF() {
-    return Container(
-      alignment: Alignment.centerLeft,
-      height: 60,
-      child: TextField(
-        decoration: InputDecoration(
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.only(top: 14.0),
-            hintText: "Operador",
-            prefixIcon: Icon(Icons.supervised_user_circle)),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     final TextEditingController operator = TextEditingController();
@@ -62,7 +48,7 @@ class _StockState extends State<Stock> {
                         SizedBox(height: 30.0),
                         objBuild.buildPasswordTF(password),
                         SizedBox(height: 30.0),
-                        objBuild.buildlLoginRB(operator, password, 1),
+                        objBuild.buildlLoginRB(operator, password, 12),
                       ],
                     ),
                   ),
