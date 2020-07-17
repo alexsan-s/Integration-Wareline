@@ -1,9 +1,14 @@
+import 'package:crypto/crypto.dart';
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:integration_wl/util/query.dart';
 import 'package:postgres/postgres.dart';
 import 'package:preferences/preferences.dart';
 
 class Setting {
   var conn;
   String underline = '';
+  Query query = Query();
 
   Future database() async {
     try {
@@ -26,8 +31,33 @@ class Setting {
     conn = await database();
   }
 
+  open(TextEditingController operator, TextEditingController password,
+      int module) async {
+    connection();
+    switch (module) {
+      case 12:
+        var pw = convertSha256(password.text);
+        var result = query.login(operator.text, pw.toString());
+        try {
+          List<List<dynamic>> row = await conn.query(result);
+          print('aaaaaa');
+        } on PostgreSQLException {
+          print('Não foi conectado ao banco');
+        }
+        login(module);
+        break;
+      default:
+    }
+  }
+
+  Digest convertSha256(String password) {
+    Digest pw = sha256.convert(utf8.encode("$password"));
+    return pw;
+  }
+
 // The method going to run for decripty.
   void underlineStr(int qtd) {
+    underline = '';
     for (var i = 0; i < qtd; i++) {
       underline = underline + '_';
     }

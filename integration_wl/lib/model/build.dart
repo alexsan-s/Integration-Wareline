@@ -1,11 +1,13 @@
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
+import 'package:integration_wl/util/query.dart';
 import 'package:integration_wl/util/setting.dart';
 
 class Build {
   final TextEditingController operator = TextEditingController();
   final TextEditingController password = TextEditingController();
+  Setting setting = Setting();
 
   // ignore: unused_element
   Container builOperatorTF(TextEditingController operator) {
@@ -41,20 +43,6 @@ class Build {
     );
   }
 
-  open(TextEditingController operator, TextEditingController password,
-      int module) {
-    switch (module) {
-      case 12:
-        Setting st = Setting();
-        print(operator.text);
-        print(password.text);
-        print(md5.convert(utf8.encode(password.text)));
-        st.login(module);
-        break;
-      default:
-    }
-  }
-
   // ignore: unused_element
   Container buildlLoginRB(TextEditingController operator,
       TextEditingController password, int module) {
@@ -65,7 +53,7 @@ class Build {
         elevation: 10.0,
         disabledColor: Colors.grey,
         onPressed: () {
-          open(operator, password, module);
+          setting.open(operator, password, module);
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
