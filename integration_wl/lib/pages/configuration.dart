@@ -35,10 +35,13 @@ class _ConfigurationState extends State<Configuration> {
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          CircularProgressIndicator();
           var temp = await setting.connection();
           showDialog(
               context: context,
               child: AlertDialog(
+                backgroundColor: Colors.red[200],
+                elevation: 9.0,
                 title: Text(
                   "Conexão com o banco",
                   textAlign: TextAlign.center,

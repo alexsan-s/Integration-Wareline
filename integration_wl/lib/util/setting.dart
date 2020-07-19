@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:io';
+
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
@@ -13,18 +16,25 @@ class Setting {
   Future database() async {
     try {
       // ignore: await_only_futures
-      db = await PostgreSQLConnection(
+      db = PostgreSQLConnection(
           PrefService.getString('host'),
           int.parse(PrefService.getString('port')),
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
       await db.open();
+      print("It's work!!!!!");
       return db;
-    } on PostgreSQLException {
-      return "Não foi possível conectar ao banco de dados.";
+    } catch (PostgreSQLException) {
+      print(PostgreSQLException.toString());
+      return PostgreSQLException;
     } catch (SocketException) {
-      return "Host/Port inacessível";
+      print(SocketException.toString());
+      print("Host/Port inacessível!");
+      return SocketException;
+    } on TimeoutException {
+      print("TimeoutException");
+      return db;
     }
   }
 
