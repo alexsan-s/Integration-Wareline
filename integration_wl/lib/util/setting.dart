@@ -5,6 +5,7 @@ import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:integration_wl/pages/stock_home.dart';
 import 'package:integration_wl/util/query.dart';
 import 'package:postgres/postgres.dart';
 import 'package:preferences/preferences.dart';
@@ -14,7 +15,7 @@ class Setting {
   String underline = '';
   Query query = Query();
 
-  Future<void> database() async {
+  Future database() async {
     try {
       db = PostgreSQLConnection(
           PrefService.getString('host'),
@@ -22,23 +23,18 @@ class Setting {
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
-      await db.open();
+      return await db.open();
     } on PostgreSQLException {
-      db = PostgreSQLException;
+      return PostgreSQLException;
     } on SocketException {
-      db = SocketException;
+      return SocketException;
     } on TimeoutException {
-      db = TimeoutException;
+      return TimeoutException;
     } on ArgumentError {
-      db = ArgumentError;
+      return ArgumentError;
     } on FormatException {
-      db = FormatException;
+      return FormatException;
     }
-  }
-
-  getDb() async {
-    await database();
-    return db;
   }
 
   open(TextEditingController operator, TextEditingController password,
@@ -55,7 +51,7 @@ class Setting {
           for (final row in row) {
             codope = row[0];
           }
-          login(codope, module);
+          return await login(codope, module);
         } on PostgreSQLException {
           print('Não foi conectado ao banco');
         } on NoSuchMethodError {
@@ -89,6 +85,6 @@ class Setting {
     for (final row in row) {
       nomeope = row[0];
     }
-    print(nomeope);
+    return nomeope.toString();
   }
 }

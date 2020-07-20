@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:integration_wl/pages/stock.dart';
 import 'package:integration_wl/util/setting.dart';
 
 class Build {
@@ -49,8 +50,9 @@ class Build {
       child: RaisedButton(
         elevation: 10.0,
         disabledColor: Colors.grey,
-        onPressed: () {
-          setting.open(operator, password, module);
+        onPressed: () async {
+          var nomeope = await setting.open(operator, password, module);
+          if (nomeope != 'null') {}
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

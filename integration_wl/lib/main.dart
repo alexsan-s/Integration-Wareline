@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integration_wl/pages/home.dart';
+import 'package:integration_wl/pages/stock_home.dart';
 import 'package:preferences/preferences.dart';
 import 'package:preferences/preference_service.dart';
 
@@ -19,13 +20,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.red,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-      ),
-      home: Home(),
-    );
+        debugShowCheckedModeBanner: false,
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.red,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: Home(),
+        routes: {
+          'StockHome': (context) => StockHome(),
+        });
   }
 }
