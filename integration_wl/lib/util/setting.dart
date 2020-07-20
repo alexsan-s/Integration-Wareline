@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:crypto/crypto.dart';
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:integration_wl/util/query.dart';
 import 'package:postgres/postgres.dart';
 import 'package:preferences/preferences.dart';
@@ -13,37 +14,31 @@ class Setting {
   String underline = '';
   Query query = Query();
 
-  Future database() async {
+  Future<void> database() async {
     try {
-      // ignore: await_only_futures
-      db = PostgreSQLConnection(
+      var connection = PostgreSQLConnection(
           PrefService.getString('host'),
           int.parse(PrefService.getString('port')),
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
-      await db.open();
-      print("It's work!!!!!");
-      return db;
-    } catch (PostgreSQLException) {
-      print(PostgreSQLException.toString());
-      return PostgreSQLException;
-    } catch (SocketException) {
-      print(SocketException.toString());
-      print("Host/Port inacessível!");
-      return SocketException;
+      db = await connection.open();
+    } on PostgreSQLException {
+      db = PostgreSQLException;
+    } on SocketException {
+      db = SocketException;
     } on TimeoutException {
-      print("TimeoutException");
-      return db;
+      db = TimeoutException;
+    } on ArgumentError {
+      db = ArgumentError;
+    } on FormatException {
+      db = FormatException;
     }
   }
 
-  connection() async {
-    try {
-      var conn = await database();
-    } on PostgreSQLException {
-      print('sorry, too many clients already');
-    }
+  getDb() async {
+    await database();
+    return db;
   }
 
   open(TextEditingController operator, TextEditingController password,
@@ -53,6 +48,7 @@ class Setting {
       case 12:
         var pw = convertSha256(password.text);
         var result = query.login(operator.text, pw.toString());
+        print(result.toString());
         try {
           List<List<dynamic>> row = await db.query('$result');
           var codope;

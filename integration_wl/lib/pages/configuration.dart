@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:integration_wl/model/build.dart';
 import 'package:integration_wl/util/setting.dart';
+import 'package:postgres/postgres.dart';
 import 'package:preferences/preferences.dart';
 
 class Configuration extends StatefulWidget {
@@ -10,6 +12,8 @@ class Configuration extends StatefulWidget {
 
 class _ConfigurationState extends State<Configuration> {
   Setting setting = Setting();
+  Build objBuild = Build();
+  String loading = "";
 
   @override
   Widget build(BuildContext context) {
@@ -18,25 +22,25 @@ class _ConfigurationState extends State<Configuration> {
         title: Text("Configuração do banco de dados"),
       ),
       body: PreferencePage([
-        PreferenceTitle("host"),
-        TextFieldPreference('host', 'host'),
+        PreferenceTitle("Host"),
+        TextFieldPreference('Host', 'host'),
         PreferenceTitle("Port"),
         TextFieldPreference('port', 'port'),
         PreferenceTitle("Database"),
-        TextFieldPreference('database', 'database'),
+        TextFieldPreference('Database', 'database'),
         PreferenceTitle("User"),
-        TextFieldPreference('user', 'username'),
+        TextFieldPreference('User', 'username'),
         PreferenceTitle("Password"),
         TextFieldPreference(
-          'password',
+          'Password',
           'password',
           obscureText: true,
         ),
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          CircularProgressIndicator();
-          var temp = await setting.connection();
+          loading = "Carregando...";
+          temp();
           showDialog(
               context: context,
               child: AlertDialog(
@@ -47,15 +51,21 @@ class _ConfigurationState extends State<Configuration> {
                   textAlign: TextAlign.center,
                 ),
                 content: Text(
-                  temp.toString(),
+                  loading,
                   textAlign: TextAlign.center,
                 ),
               ));
-          print(temp);
-          setState(() {});
         },
-        child: Icon(Icons.assignment_turned_in),
+        child: Icon(Icons.check_circle),
       ),
     );
+  }
+
+  Future<void> temp() async {
+    var temp = await setting.getDb();
+    print('oi');
+    setState(() {
+      loading = temp.toString();
+    });
   }
 }
