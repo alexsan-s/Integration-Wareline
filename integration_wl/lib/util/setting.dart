@@ -16,18 +16,13 @@ class Setting {
 
   Future<void> database() async {
     try {
-      var connection = PostgreSQLConnection(
+      db = PostgreSQLConnection(
           PrefService.getString('host'),
           int.parse(PrefService.getString('port')),
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
-      print(PrefService.getString('host'));
-      print(PrefService.getString('port'));
-      print(PrefService.getString('database'));
-      print(PrefService.getString('username'));
-      print(PrefService.getString('password'));
-      db = await connection.open();
+      await db.open();
     } on PostgreSQLException {
       db = PostgreSQLException;
     } on SocketException {
@@ -53,9 +48,9 @@ class Setting {
       case 12:
         var pw = convertSha256(password.text);
         var result = query.login(operator.text, pw.toString());
-        print(result.toString());
         try {
           List<List<dynamic>> row = await db.query('$result');
+          print(result.toString());
           var codope;
           for (final row in row) {
             codope = row[0];
@@ -64,7 +59,7 @@ class Setting {
         } on PostgreSQLException {
           print('Não foi conectado ao banco');
         } on NoSuchMethodError {
-          print('NoSuchMethodError');
+          print(NoSuchMethodError);
         }
         break;
       default:

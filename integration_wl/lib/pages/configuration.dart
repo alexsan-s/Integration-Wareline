@@ -63,9 +63,7 @@ class _ConfigurationState extends State<Configuration> {
 
   Future temp() async {
     var temp = await setting.getDb();
-    print(temp);
-    setState(() {
-      loading = temp.toString();
-    });
+    loading = temp.toString();
+    setState(() {});
   }
 }
