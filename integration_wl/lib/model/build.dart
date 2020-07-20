@@ -1,7 +1,4 @@
-import 'dart:convert';
-import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
-import 'package:integration_wl/util/query.dart';
 import 'package:integration_wl/util/setting.dart';
 
 class Build {
@@ -74,7 +71,7 @@ class Build {
       'Version 1.0',
       textAlign: TextAlign.center,
       style: TextStyle(
-          fontSize: 15, color: Colors.red, fontWeight: FontWeight.bold),
+          fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),
     );
   }
 }

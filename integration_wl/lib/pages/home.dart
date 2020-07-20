@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:integration_wl/model/build.dart';
 import 'package:integration_wl/pages/stock.dart';
 
 import 'configuration.dart';
@@ -10,6 +11,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   AnimationController _controller;
+
+  Build objBuild = Build();
 
   @override
   void initState() {
@@ -26,53 +29,47 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white70,
-      appBar: AppBar(
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.settings),
-            onPressed: () async {
-              await Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => Configuration()),
-              );
-              // ignore: unused_element
-              setState() {}
-            },
-          )
-        ],
-      ),
-      body: Container(
-        color: Colors.white,
-        alignment: Alignment.topCenter,
-        padding: EdgeInsets.all(20.0),
-        margin: EdgeInsets.all(20.0),
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              elevation: 10.0,
-              onPressed: () {
-                Navigator.push(
+        backgroundColor: Colors.white70,
+        appBar: AppBar(
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.settings),
+              onPressed: () async {
+                await Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Stock()),
+                  MaterialPageRoute(builder: (context) => Configuration()),
                 );
+                // ignore: unused_element
+                setState() {}
               },
-              disabledColor: Colors.white,
-              child: Image.asset(
-                'images/wl-module-stock.jpg',
-                width: 100,
-                alignment: Alignment.center,
-              ),
-            ),
+            )
           ],
         ),
-      ),
-      bottomNavigationBar: Text(
-        'Version 1.0',
-        textAlign: TextAlign.center,
-        style: TextStyle(
-            fontSize: 15, color: Colors.red, fontWeight: FontWeight.bold),
-      ),
-    );
+        body: Container(
+          color: Colors.white,
+          alignment: Alignment.topCenter,
+          padding: EdgeInsets.all(20.0),
+          margin: EdgeInsets.all(20.0),
+          child: Column(
+            children: <Widget>[
+              RaisedButton(
+                elevation: 10.0,
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Stock()),
+                  );
+                },
+                disabledColor: Colors.white,
+                child: Image.asset(
+                  'images/wl-module-stock.jpg',
+                  width: 100,
+                  alignment: Alignment.center,
+                ),
+              ),
+            ],
+          ),
+        ),
+        bottomNavigationBar: objBuild.buildVersion());
   }
 }

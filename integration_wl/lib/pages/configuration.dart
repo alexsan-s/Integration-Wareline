@@ -40,7 +40,7 @@ class _ConfigurationState extends State<Configuration> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           loading = "Carregando...";
-          temp();
+          await temp();
           showDialog(
               context: context,
               child: AlertDialog(
@@ -61,9 +61,9 @@ class _ConfigurationState extends State<Configuration> {
     );
   }
 
-  Future<void> temp() async {
+  Future temp() async {
     var temp = await setting.getDb();
-    print('oi');
+    print(temp);
     setState(() {
       loading = temp.toString();
     });

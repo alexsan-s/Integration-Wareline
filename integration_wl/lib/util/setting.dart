@@ -22,6 +22,11 @@ class Setting {
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
+      print(PrefService.getString('host'));
+      print(PrefService.getString('port'));
+      print(PrefService.getString('database'));
+      print(PrefService.getString('username'));
+      print(PrefService.getString('password'));
       db = await connection.open();
     } on PostgreSQLException {
       db = PostgreSQLException;
