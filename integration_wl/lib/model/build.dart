@@ -51,8 +51,8 @@ class Build {
         elevation: 10.0,
         disabledColor: Colors.grey,
         onPressed: () async {
-          // var nomeope = await setting.open(operator, password, module);
-          var nomeope = 'Alex';
+          var nomeope = await setting.open(operator, password, module);
+          print(nomeope);
           if (nomeope != 'null') {
             Navigator.pushNamed(context, 'StockHome');
           }
