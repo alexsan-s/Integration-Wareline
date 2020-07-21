@@ -87,4 +87,13 @@ class Setting {
     }
     return nomeope.toString();
   }
+
+  movement(String type) {
+    switch (type) {
+      case 'C1':
+        print('entrei');
+        break;
+      default:
+    }
+  }
 }

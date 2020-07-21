@@ -43,7 +43,7 @@ class Build {
 
   // ignore: unused_element
   Container buildlLoginRB(TextEditingController operator,
-      TextEditingController password, int module) {
+      TextEditingController password, int module, BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 25.0),
       width: double.infinity,
@@ -51,8 +51,11 @@ class Build {
         elevation: 10.0,
         disabledColor: Colors.grey,
         onPressed: () async {
-          var nomeope = await setting.open(operator, password, module);
-          if (nomeope != 'null') {}
+          // var nomeope = await setting.open(operator, password, module);
+          var nomeope = 'Alex';
+          if (nomeope != 'null') {
+            Navigator.pushNamed(context, 'StockHome');
+          }
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -74,6 +77,17 @@ class Build {
       textAlign: TextAlign.center,
       style: TextStyle(
           fontSize: 16, color: Colors.red, fontWeight: FontWeight.bold),
+    );
+  }
+
+  RaisedButton builButtonRB(String text, String type) {
+    return RaisedButton(
+      elevation: 10.0,
+      onPressed: () {
+        setting.movement(type);
+      },
+      disabledColor: Colors.white,
+      child: Text('$text'),
     );
   }
 }

@@ -48,7 +48,7 @@ class _StockState extends State<Stock> {
                         SizedBox(height: 30.0),
                         objBuild.buildPasswordTF(password),
                         SizedBox(height: 30.0),
-                        objBuild.buildlLoginRB(operator, password, 12),
+                        objBuild.buildlLoginRB(operator, password, 12, context),
                       ],
                     ),
                   ),
