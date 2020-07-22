@@ -54,7 +54,7 @@ class Build {
         onPressed: () async {
           var nomeope = await setting.open(operator, password, module);
           if (nomeope != 'null') {
-            PrefService.setString('operator', '$operator');
+            PrefService.setString('operator', '$nomeope');
             Navigator.pushNamed(context, 'StockHome');
           } else {
             buildAlert(context, 'Operador sem permissão');
@@ -83,11 +83,11 @@ class Build {
     );
   }
 
-  RaisedButton builButtonRB(String text, String type) {
+  RaisedButton builButtonRB(String text, String type, int module) {
     return RaisedButton(
       elevation: 10.0,
       onPressed: () {
-        setting.movement(type);
+        setting.movement(type, module);
       },
       disabledColor: Colors.white,
       child: Text('$text'),

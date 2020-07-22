@@ -13,12 +13,11 @@ class _StockHomeState extends State<StockHome> {
 
   @override
   Widget build(BuildContext context) {
-    print("O operador é $operator");
     return Scaffold(
         backgroundColor: Colors.white70,
         appBar: AppBar(
           title: Text(
-            'Estoque',
+            'Estoque - $operator',
             textAlign: TextAlign.center,
           ),
         ),
@@ -29,7 +28,8 @@ class _StockHomeState extends State<StockHome> {
           margin: EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
-              objBuild.builButtonRB('Transferência entre estoques (C1)', 'C1')
+              objBuild.builButtonRB(
+                  'Transferência entre estoques (C1)', 'C1', 1583)
             ],
           ),
         ),

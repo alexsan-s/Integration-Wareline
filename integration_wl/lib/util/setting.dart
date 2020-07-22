@@ -91,10 +91,11 @@ class Setting {
     return nomeope.toString();
   }
 
-  movement(String type) {
+  movement(String type, int module) {
     switch (type) {
       case 'C1':
-        print('entrei');
+        underlineStr(module);
+
         break;
       default:
     }
