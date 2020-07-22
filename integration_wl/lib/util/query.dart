@@ -4,6 +4,10 @@ class Query {
   }
 
   String module(var underline, String codope) {
-    return """select nomeope from cadope where podeusar like '${underline}1%' and codope like '$codope'""";
+    return """SELECT nomeope FROM cadope WHERE podeusar LIKE '${underline}1%' AND codope LIKE '$codope'""";
+  }
+
+  String stock(String underline, int op, String codope) {
+    return """SELECT nomeope FROM cadope WHERE podeusar LIKE '$underline$op%' AND codope LIKE '$codope'""";
   }
 }

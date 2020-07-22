@@ -39,7 +39,6 @@ class _ConfigurationState extends State<Configuration> {
       ]),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          loading = "Carregando...";
           await temp();
           showDialog(
               context: context,

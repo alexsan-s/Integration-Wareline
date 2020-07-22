@@ -7,11 +7,12 @@ import 'package:preferences/preference_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await PrefService.init(prefix: 'pref_');
-  PrefService.setDefaultValues({'host': 'localhost'});
+  PrefService.setDefaultValues({'host': '192.168.254.4'});
   PrefService.setDefaultValues({'port': '5432'});
-  PrefService.setDefaultValues({'database': 'root'});
-  PrefService.setDefaultValues({'username': 'admin'});
-  PrefService.setDefaultValues({'password': 'admin'});
+  PrefService.setDefaultValues({'database': 'dbteste'});
+  PrefService.setDefaultValues({'username': 'TI'});
+  PrefService.setDefaultValues({'password': 'T3cnologia20'});
+  PrefService.setDefaultValues({'operator': 'root'});
   runApp(MyApp());
 }
 

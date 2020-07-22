@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integration_wl/model/build.dart';
+import 'package:preferences/preference_service.dart';
 
 class StockHome extends StatefulWidget {
   @override
@@ -7,9 +8,12 @@ class StockHome extends StatefulWidget {
 }
 
 class _StockHomeState extends State<StockHome> {
+  String operator = PrefService.getString('operator');
   Build objBuild = Build();
+
   @override
   Widget build(BuildContext context) {
+    print("O operador é $operator");
     return Scaffold(
         backgroundColor: Colors.white70,
         appBar: AppBar(
@@ -25,7 +29,7 @@ class _StockHomeState extends State<StockHome> {
           margin: EdgeInsets.all(20.0),
           child: Column(
             children: <Widget>[
-              objBuild.builButtonRB('Transferência entre estoque (C1)', 'C1')
+              objBuild.builButtonRB('Transferência entre estoques (C1)', 'C1')
             ],
           ),
         ),

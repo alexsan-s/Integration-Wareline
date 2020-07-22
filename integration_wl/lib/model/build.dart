@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:integration_wl/pages/stock.dart';
 import 'package:integration_wl/util/setting.dart';
+import 'package:preferences/preference_service.dart';
 
 class Build {
   final TextEditingController operator = TextEditingController();
@@ -52,9 +53,11 @@ class Build {
         disabledColor: Colors.grey,
         onPressed: () async {
           var nomeope = await setting.open(operator, password, module);
-          print(nomeope);
           if (nomeope != 'null') {
+            PrefService.setString('operator', '$operator');
             Navigator.pushNamed(context, 'StockHome');
+          } else {
+            buildAlert(context, 'Operador sem permissão');
           }
         },
         padding: EdgeInsets.all(15.0),
@@ -89,5 +92,23 @@ class Build {
       disabledColor: Colors.white,
       child: Text('$text'),
     );
+  }
+
+  Future buildAlert(BuildContext context, String error) {
+    return showDialog(
+        context: context,
+        child: AlertDialog(
+          backgroundColor: Colors.red[200],
+          elevation: 9.0,
+          title: Text(
+            "Permissão",
+            textAlign: TextAlign.center,
+          ),
+          content: Text(
+            error,
+            textAlign: TextAlign.center,
+          ),
+        ));
+    ;
   }
 }

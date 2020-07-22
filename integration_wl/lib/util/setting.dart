@@ -25,14 +25,19 @@ class Setting {
           password: PrefService.getString('password'));
       return await db.open();
     } on PostgreSQLException {
+      print(PostgreSQLException);
       return PostgreSQLException;
     } on SocketException {
+      print(SocketException);
       return SocketException;
     } on TimeoutException {
+      print(TimeoutException);
       return TimeoutException;
     } on ArgumentError {
+      print(ArgumentError);
       return ArgumentError;
     } on FormatException {
+      print(FormatException);
       return FormatException;
     }
   }
@@ -46,7 +51,6 @@ class Setting {
         var result = query.login(operator.text, pw.toString());
         try {
           List<List<dynamic>> row = await db.query('$result');
-          print(result.toString());
           var codope;
           for (final row in row) {
             codope = row[0];
@@ -79,7 +83,6 @@ class Setting {
     // connection();
     underlineStr(module);
     var result = query.module(underline, codope);
-    print(result);
     List<List<dynamic>> row = await db.query('$result');
     var nomeope;
     for (final row in row) {
