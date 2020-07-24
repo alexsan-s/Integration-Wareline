@@ -138,7 +138,7 @@ class Build {
         ));
   }
 
-  teste(TextEditingController operator, TextEditingController password,
+  Future teste(TextEditingController operator, TextEditingController password,
       int module, BuildContext context) async {
     var nomeope = await setting.open(operator, password, module);
     print('$nomeope');
