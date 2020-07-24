@@ -25,44 +25,44 @@ class Setting {
           password: PrefService.getString('password'));
       return await db.open();
     } on PostgreSQLException {
-      print(PostgreSQLException);
       return PostgreSQLException;
     } on SocketException {
-      print(SocketException);
       return SocketException;
     } on TimeoutException {
-      print(TimeoutException);
       return TimeoutException;
     } on ArgumentError {
-      print(ArgumentError);
       return ArgumentError;
     } on FormatException {
-      print(FormatException);
       return FormatException;
     }
   }
 
   open(TextEditingController operator, TextEditingController password,
       int module) async {
-    await database();
-    switch (module) {
-      case 12:
-        var pw = convertSha256(password.text);
-        var result = query.login(operator.text, pw.toString());
-        try {
-          List<List<dynamic>> row = await db.query('$result');
-          var codope;
-          for (final row in row) {
-            codope = row[0];
+    var db = await database();
+    print('aaaaaaa $db');
+    if (db == "null") {
+      switch (module) {
+        case 12:
+          var pw = convertSha256(password.text);
+          var result = query.login(operator.text, pw.toString());
+          try {
+            List<List<dynamic>> row = await db.query('$result');
+            var codope;
+            for (final row in row) {
+              codope = row[0];
+            }
+            return await login(codope, module);
+          } on PostgreSQLException {
+            return 'erroDatabase';
+          } on NoSuchMethodError {
+            return 'erroDatabase';
           }
-          return await login(codope, module);
-        } on PostgreSQLException {
-          print('Não foi conectado ao banco');
-        } on NoSuchMethodError {
-          print(NoSuchMethodError);
-        }
-        break;
-      default:
+          break;
+        default:
+      }
+    } else {
+      return 'erroDatabase';
     }
   }
 

@@ -51,14 +51,23 @@ class Build {
       child: RaisedButton(
         elevation: 10.0,
         disabledColor: Colors.grey,
-        onPressed: () async {
-          var nomeope = await setting.open(operator, password, module);
-          if (nomeope != 'null') {
-            PrefService.setString('operator', '$nomeope');
-            Navigator.pushNamed(context, 'StockHome');
-          } else {
-            buildAlert(context, 'Operador sem permissão');
-          }
+        onPressed: () {
+          FutureBuilder(
+              future: teste(operator, password, module, context),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Center(
+                    child: Text(
+                      snapshot.data,
+                      style: TextStyle(fontSize: 20.0),
+                    ),
+                  );
+                } else {
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }
+              });
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(
@@ -94,7 +103,7 @@ class Build {
     );
   }
 
-  Future buildAlert(BuildContext context, String error) {
+  Future buildAlertPermission(BuildContext context, String error) {
     return showDialog(
         context: context,
         child: AlertDialog(
@@ -110,5 +119,40 @@ class Build {
           ),
         ));
     ;
+  }
+
+  Future buildAlertDatabase(BuildContext context, String mensage) {
+    return showDialog(
+        context: context,
+        child: AlertDialog(
+          backgroundColor: Colors.red[200],
+          elevation: 9.0,
+          title: Text(
+            "Conexão com o banco",
+            textAlign: TextAlign.center,
+          ),
+          content: Text(
+            mensage,
+            textAlign: TextAlign.center,
+          ),
+        ));
+  }
+
+  teste(TextEditingController operator, TextEditingController password,
+      int module, BuildContext context) async {
+    var nomeope = await setting.open(operator, password, module);
+    print('$nomeope');
+    switch (nomeope) {
+      case 'erroDatabase':
+        buildAlertDatabase(
+            context, 'Não foi possível conectar ao banco de dados');
+        break;
+      case 'null':
+        buildAlertPermission(context, 'Operador sem permissão');
+        break;
+      default:
+        PrefService.setString('operator', '$nomeope');
+        Navigator.pushNamed(context, 'StockHome');
+    }
   }
 }

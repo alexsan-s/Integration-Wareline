@@ -40,20 +40,7 @@ class _ConfigurationState extends State<Configuration> {
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
           await temp();
-          showDialog(
-              context: context,
-              child: AlertDialog(
-                backgroundColor: Colors.red[200],
-                elevation: 9.0,
-                title: Text(
-                  "Conexão com o banco",
-                  textAlign: TextAlign.center,
-                ),
-                content: Text(
-                  loading,
-                  textAlign: TextAlign.center,
-                ),
-              ));
+          objBuild.buildAlertDatabase(context, loading);
         },
         child: Icon(Icons.check_circle),
       ),
