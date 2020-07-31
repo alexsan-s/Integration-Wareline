@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:integration_wl/model/loading.dart';
 import 'package:integration_wl/pages/stock.dart';
 import 'package:integration_wl/util/setting.dart';
 import 'package:preferences/preference_service.dart';
@@ -8,7 +7,6 @@ class Build {
   final TextEditingController operator = TextEditingController();
   final TextEditingController password = TextEditingController();
   Setting setting = Setting();
-  Loading loading = Loading();
 
   // ignore: unused_element
   Container builOperatorTF(TextEditingController operator) {
@@ -53,8 +51,21 @@ class Build {
       child: RaisedButton(
         elevation: 10.0,
         disabledColor: Colors.grey,
-        onPressed: () {
-          return loading.getFuture(operator, password, module, context);
+        onPressed: () async {
+          var nomeope = await setting.open(operator, password, module);
+          print('$nomeope');
+          switch (nomeope) {
+            case 'erroDatabase':
+              buildAlertDatabase(
+                  context, 'Não foi possível conectar ao banco de dados');
+              break;
+            case 'null':
+              buildAlertPermission(context, 'Operador sem permissão');
+              break;
+            default:
+              PrefService.setString('operator', '$nomeope');
+              Navigator.pushNamed(context, 'StockHome');
+          }
         },
         padding: EdgeInsets.all(15.0),
         shape: RoundedRectangleBorder(

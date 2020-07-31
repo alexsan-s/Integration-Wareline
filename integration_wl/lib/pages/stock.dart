@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:integration_wl/model/build.dart';
-import 'package:integration_wl/model/loading.dart';
 
 class Stock extends StatefulWidget {
   @override
@@ -15,7 +14,6 @@ class _StockState extends State<Stock> {
   Widget build(BuildContext context) {
     final TextEditingController operator = TextEditingController();
     final TextEditingController password = TextEditingController();
-    Loading loading = Loading();
 
     return Scaffold(
         appBar: AppBar(),
@@ -38,22 +36,6 @@ class _StockState extends State<Stock> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
-                        FutureBuilder<bool>(
-                          future: loading.getFuture(
-                              operator, password, 12, context),
-                          builder: (context, snapshot) {
-                            if (snapshot.connectionState ==
-                                ConnectionState.waiting)
-                              return Center(
-                                child: CircularProgressIndicator(),
-                              );
-                            else
-                              return Container(
-                                color:
-                                    snapshot.data ? Colors.green : Colors.red,
-                              );
-                          },
-                        ),
                         Text(
                           'Acessar',
                           style: TextStyle(
@@ -65,7 +47,7 @@ class _StockState extends State<Stock> {
                         objBuild.builOperatorTF(operator),
                         SizedBox(height: 30.0),
                         objBuild.buildPasswordTF(password),
-                        SizedBox(height: 30.0),
+                        SizedBox(height: 40.0),
                         objBuild.buildlLoginRB(operator, password, 12, context),
                       ],
                     ),
