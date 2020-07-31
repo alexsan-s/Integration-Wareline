@@ -95,7 +95,7 @@ class Setting {
     switch (type) {
       case 'C1':
         underlineStr(module);
-
+        var result = query.stock(underline, 2, codope)
         break;
       default:
     }
