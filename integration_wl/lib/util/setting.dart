@@ -23,7 +23,8 @@ class Setting {
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
-      return await db.open();
+      db = await db.open();
+      return db;
     } on PostgreSQLException {
       return PostgreSQLException;
     } on SocketException {
@@ -39,9 +40,9 @@ class Setting {
 
   open(TextEditingController operator, TextEditingController password,
       int module) async {
-    var db = await database();
-    print('aaaaaaa $db');
-    if (db == "null") {
+    await database();
+    print('aaaaaaab $db');
+    if (db == null) {
       switch (module) {
         case 12:
           var pw = convertSha256(password.text);
@@ -95,7 +96,8 @@ class Setting {
     switch (type) {
       case 'C1':
         underlineStr(module);
-        var result = query.stock(underline, 2, codope)
+        var result =
+            query.stock(underline, 2, PrefService.getString('operator'));
         break;
       default:
     }
