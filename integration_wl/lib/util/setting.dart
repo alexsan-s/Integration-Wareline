@@ -23,8 +23,7 @@ class Setting {
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
-      db = await db.open();
-      return db;
+      return await db.open();
     } on PostgreSQLException {
       return PostgreSQLException;
     } on SocketException {
@@ -40,30 +39,27 @@ class Setting {
 
   open(TextEditingController operator, TextEditingController password,
       int module) async {
-    await database();
-    print('aaaaaaab $db');
-    if (db == null) {
-      switch (module) {
-        case 12:
-          var pw = convertSha256(password.text);
-          var result = query.login(operator.text, pw.toString());
-          try {
-            List<List<dynamic>> row = await db.query('$result');
-            var codope;
-            for (final row in row) {
-              codope = row[0];
-            }
-            return await login(codope, module);
-          } on PostgreSQLException {
-            return 'erroDatabase';
-          } on NoSuchMethodError {
-            return 'erroDatabase';
+    var db = await database();
+    switch (module) {
+      case 12:
+        var pw = convertSha256(password.text);
+        var result = query.login(operator.text, pw.toString());
+        print(result);
+        try {
+          List<List<dynamic>> row = await db.query('$result');
+          print('oi');
+          var codope;
+          for (final row in row) {
+            codope = row[0];
           }
-          break;
-        default:
-      }
-    } else {
-      return 'erroDatabase';
+          return await login(codope, module);
+        } on PostgreSQLException {
+          return 'erroDatabase';
+        } on NoSuchMethodError {
+          return 'erroDatabase';
+        }
+        break;
+      default:
     }
   }
 
