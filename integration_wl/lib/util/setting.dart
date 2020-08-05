@@ -11,18 +11,24 @@ import 'package:postgres/postgres.dart';
 import 'package:preferences/preferences.dart';
 
 class Setting {
-  var db;
+  var conn;
   String underline = '';
   Query query = Query();
 
   Future database() async {
     try {
+<<<<<<< HEAD
       db = PostgreSQLConnection(
+=======
+      // ignore: await_only_futures
+      final connection = await PostgreSQLConnection(
+>>>>>>> parent of c3b4d8b... login ok
           PrefService.getString('host'),
           int.parse(PrefService.getString('port')),
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
+<<<<<<< HEAD
       return await db.open();
     } on PostgreSQLException {
       return PostgreSQLException;
@@ -35,17 +41,34 @@ class Setting {
     } on FormatException {
       return FormatException;
     }
+=======
+      return connection;
+    } on PostgreSQLException {
+      return "Não foi possível conectar ao banco de dados.";
+    } catch (SocketException) {
+      return "Host/Port inacessível";
+    }
+  }
+
+  connection() async {
+    conn = await database();
+>>>>>>> parent of c3b4d8b... login ok
   }
 
   open(TextEditingController operator, TextEditingController password,
       int module) async {
+<<<<<<< HEAD
     var db = await database();
+=======
+    connection();
+>>>>>>> parent of c3b4d8b... login ok
     switch (module) {
       case 12:
         var pw = convertSha256(password.text);
         var result = query.login(operator.text, pw.toString());
         print(result);
         try {
+<<<<<<< HEAD
           List<List<dynamic>> row = await db.query('$result');
           print('oi');
           var codope;
@@ -57,7 +80,14 @@ class Setting {
           return 'erroDatabase';
         } on NoSuchMethodError {
           return 'erroDatabase';
+=======
+          List<List<dynamic>> row = await conn.query(result);
+          print('aaaaaa');
+        } on PostgreSQLException {
+          print('Não foi conectado ao banco');
+>>>>>>> parent of c3b4d8b... login ok
         }
+        login(module);
         break;
       default:
     }
@@ -76,9 +106,10 @@ class Setting {
     }
   }
 
-  login(var codope, int module) async {
-    // connection();
+  login(int module) async {
+    connection();
     underlineStr(module);
+<<<<<<< HEAD
     var result = query.module(underline, codope);
     List<List<dynamic>> row = await db.query('$result');
     var nomeope;
@@ -97,5 +128,21 @@ class Setting {
         break;
       default:
     }
+=======
+    print(
+        "select nomeope from cadope where podeusar like '${underline}1%' and nomeope like 'TESTE'");
+    // List<List<dynamic>> teste = await conn.query(
+    //     "select nomeope from cadope where podeusar like '${underline}1%' and nomeope like 'TESTE'");
+    // for (final row in teste) {
+    //   print(row[0]);
+    // }
+>>>>>>> parent of c3b4d8b... login ok
   }
 }
+
+//   List<List<dynamic>> teste = await connection.query(
+//       "select nomeope from cadope where podeusar like '${underline}1%' and nomeope like 'TESTE'");
+//   for (final row in teste) {
+//     print(row[0]);
+//   }
+// }
