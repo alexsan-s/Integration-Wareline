@@ -1,6 +1,7 @@
 class Query {
   String login(String operator, String password) {
 <<<<<<< HEAD
+<<<<<<< HEAD
     return """SELECT co2.codope FROM cadope2 cO2 LEFT JOIN cadope co ON co2.codope = co.codope WHERE co.username LIKE '$operator' AND co2.senha = '$password' """;
   }
 
@@ -11,12 +12,17 @@ class Query {
   String stock(String underline, int op, String codope) {
     return """SELECT nomeope FROM cadope WHERE podeusar LIKE '$underline$op%' AND codope LIKE '$codope'""";
 =======
+=======
+>>>>>>> parent of c3b4d8b... login ok
     return """
     SELECT co2.codope 
     FROM cadope2 cO2 
     LEFT JOIN cadope co ON co2.codope = co.codope 
     WHERE co.username LIKE '$operator' AND 
     co2.senha = '$password' """;
+<<<<<<< HEAD
+>>>>>>> parent of c3b4d8b... login ok
+=======
 >>>>>>> parent of c3b4d8b... login ok
   }
 }

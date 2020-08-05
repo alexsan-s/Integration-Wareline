@@ -22,12 +22,16 @@ class Setting {
 =======
       // ignore: await_only_futures
       final connection = await PostgreSQLConnection(
+<<<<<<< HEAD
+>>>>>>> parent of c3b4d8b... login ok
+=======
 >>>>>>> parent of c3b4d8b... login ok
           PrefService.getString('host'),
           int.parse(PrefService.getString('port')),
           PrefService.getString('database'),
           username: PrefService.getString('username'),
           password: PrefService.getString('password'));
+<<<<<<< HEAD
 <<<<<<< HEAD
       return await db.open();
     } on PostgreSQLException {
@@ -42,6 +46,8 @@ class Setting {
       return FormatException;
     }
 =======
+=======
+>>>>>>> parent of c3b4d8b... login ok
       return connection;
     } on PostgreSQLException {
       return "Não foi possível conectar ao banco de dados.";
@@ -52,13 +58,20 @@ class Setting {
 
   connection() async {
     conn = await database();
+<<<<<<< HEAD
+>>>>>>> parent of c3b4d8b... login ok
+=======
 >>>>>>> parent of c3b4d8b... login ok
   }
 
   open(TextEditingController operator, TextEditingController password,
       int module) async {
 <<<<<<< HEAD
+<<<<<<< HEAD
     var db = await database();
+=======
+    connection();
+>>>>>>> parent of c3b4d8b... login ok
 =======
     connection();
 >>>>>>> parent of c3b4d8b... login ok
@@ -68,6 +81,7 @@ class Setting {
         var result = query.login(operator.text, pw.toString());
         print(result);
         try {
+<<<<<<< HEAD
 <<<<<<< HEAD
           List<List<dynamic>> row = await db.query('$result');
           print('oi');
@@ -80,6 +94,12 @@ class Setting {
           return 'erroDatabase';
         } on NoSuchMethodError {
           return 'erroDatabase';
+=======
+          List<List<dynamic>> row = await conn.query(result);
+          print('aaaaaa');
+        } on PostgreSQLException {
+          print('Não foi conectado ao banco');
+>>>>>>> parent of c3b4d8b... login ok
 =======
           List<List<dynamic>> row = await conn.query(result);
           print('aaaaaa');
@@ -110,6 +130,7 @@ class Setting {
     connection();
     underlineStr(module);
 <<<<<<< HEAD
+<<<<<<< HEAD
     var result = query.module(underline, codope);
     List<List<dynamic>> row = await db.query('$result');
     var nomeope;
@@ -129,6 +150,8 @@ class Setting {
       default:
     }
 =======
+=======
+>>>>>>> parent of c3b4d8b... login ok
     print(
         "select nomeope from cadope where podeusar like '${underline}1%' and nomeope like 'TESTE'");
     // List<List<dynamic>> teste = await conn.query(
@@ -136,6 +159,9 @@ class Setting {
     // for (final row in teste) {
     //   print(row[0]);
     // }
+<<<<<<< HEAD
+>>>>>>> parent of c3b4d8b... login ok
+=======
 >>>>>>> parent of c3b4d8b... login ok
   }
 }
